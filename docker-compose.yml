@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  drupal:
+    image: custom-drupal
+    build: .
+    ports:
+      - 3000:80
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - post:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: qwerty
+    restart: always
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  post:
